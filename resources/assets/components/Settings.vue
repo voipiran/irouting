@@ -1,0 +1,164 @@
+<template>
+  <div class="table-shadow">
+    <div class="pb-4">
+      <h3>تنظیمات</h3>
+    </div>
+    <div>
+      <table>
+        <thead class="">
+          <tr class="text-center">
+            <th class="">نام مسیر</th>
+            <th class="">معرفی</th>
+            <th class="">بازه زمانی</th>
+            <th class="">بیان شماره کارشناس</th>
+            <th class="">عدد قبول درخواست</th>
+            <th class="">فعال</th>
+            <th class="">اولویت</th>
+            <th class="">بیان شماره کارشناس</th>
+            <th class="">عملیات</th>
+          </tr>
+        </thead>
+        <tbody class="px-5">
+          <tr class="text-center" v-for="(item, index) in dataSetting" :key="index">
+            <td class="text-center">{{ item.route_name_title }}</td>
+            <td class="text-center">{{ item.route_desc }}</td>
+            <td class="text-center">{{ showLableDate(item.timespan) }}</td>
+            <td class="text-center">{{ item.play_agent_num == 1 ? 'فعال' : 'غیر فعال' }}</td>
+            <td class="text-center">{{ item.accept_digit == 'd' ? 'لطفا منتظر بمانید' : item.accept_digit }}</td>
+            <td class="text-center">{{ item.enable == 1 ? 'فعال' : 'غیر فعال' }}</td>
+            <td class="text-center">{{ item.priority }}</td>
+            <td class="text-center">{{ item.agent_num_prefix ? item.agent_num_prefix : '' }}</td>
+            <td>
+              <RouterLink tag="Button" :to="{ name: 'SettingsEdit', params: { id: item.id } }" class="btn btn-warning">ویرایش</RouterLink>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      dataSetting: [],
+    };
+  },
+  methods: {
+    showLableDate(day) {
+      let lable;
+      switch (day) {
+        case "1":
+          lable = 'امروز';
+          break;
+        case "2":
+          lable = 'دیروز';
+          break;
+        case "7":
+          lable = 'هفته گذشته';
+          break;
+        case "31":
+          lable = 'ماه گذشته';
+          break;
+        case "365":
+          lable = 'سال گذشته';
+          break;
+        default:
+          lable = `${day} روز گذشته`;
+          break;
+      }
+      return lable;
+    }
+  },
+  async mounted() {
+    try {
+      let result = await axios({
+        method: "post",
+        url: `${API}/settings/action`,
+        data: {
+          method: "getData",
+        },
+
+      });
+      this.dataSetting = result.data.data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+};
+</script>
+
+<style lang='scss'>
+.table-shadow {
+  box-shadow: 3px 12px 13px #b9b9b978;
+  margin-top: 50px;
+  padding: 20px;
+  overflow: auto;
+}
+table {
+  border-collapse: collapse !important;
+  width: 100%;
+  th,
+  td {
+    // white-space: nowrap;
+    text-align: center;
+  }
+  thead {
+    background-color: #dfdfdf;
+    th {
+      padding: 10px;
+    }
+  }
+  tbody {
+    tr:nth-child(odd) {
+      background-color: #f6f6f6;
+    }
+    tr:nth-child(even) {
+      background-color: #ededed;
+    }
+    td {
+      padding: 10px;
+    }
+  }
+}
+
+// btn-warning
+.btn-warning {
+  border-radius: 9px;
+  background-color: #ffb115;
+  padding: 8px 20px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  flex-direction: row-reverse;
+  border: 1px solid #ffb115;
+  white-space: nowrap;
+  // min-width: 100px;
+
+  &:hover {
+    cursor: pointer;
+    color: #eea512;
+    background-color: #fff8eb;
+
+    svg {
+      stroke: #eea512;
+      transition: all 0.1s linear !important;
+    }
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  @media (max-width: 1400px) {
+    font-size: 12px;
+    padding: 6px 16px;
+  }
+}
+</style>
