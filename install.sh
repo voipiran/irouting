@@ -17,6 +17,7 @@ echo "-------------Installing Composer----------------"
 #yum -y -q install php-cli php-zip wget unzip  > /dev/null
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer  > /dev/null
+yes | composer install
 echo "Installing Composer Sucsessfully"
 sleep 1
 
@@ -43,6 +44,9 @@ yes | cp -avr public/* public/.htaccess /var/www/html/voipiran/irouting > /dev/n
 yes | cp -avr * .env /var/www/voipiran/irouting > /dev/null
 yes | rm -rf /var/www/voipiran/irouting/public > /dev/null
 
+
+
+
 ln -s /var/www/voipiran/irouting/storage/app /var/www/html/voipiran/irouting/storage
 
 
@@ -58,6 +62,12 @@ chmod 777 /var/lib/asterisk/agi-bin/vi-irouting.php
 chown -R asterisk:asterisk /var/www/voipiran/irouting
 chown -R asterisk:asterisk /var/www/voipiran
 chown -R asterisk:asterisk /var/www/html/voipiran
+chown -R asterisk:root /var/www/voipiran/irouting/storage
+chmod -R 777 /var/www/voipiran/irouting/storage
+chown -R asterisk:root /var/www/voipiran/irouting/storage/app
+chmod -R 777 /var/www/voipiran/irouting/storage/app
+
+
 
 
 echo '<Directory "/var/www/html/voipiran/irouting">' >> /etc/httpd/conf.d/issabel-htaccess.conf
@@ -67,7 +77,7 @@ echo '</Directory>' >> /etc/httpd/conf.d/issabel-htaccess.conf
 
 #Create Database
 php /var/www/voipiran/irouting/artisan cache:clear
-composer dump-autoload
+yes | composer dump-autoload
 
 ### Add from-pstn Context
 echo "-------------Extension Custom----------------"
@@ -76,6 +86,8 @@ echo "[from-pstn]" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,1,Answer()" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,n,Goto(ext-did,s,1)" >> /etc/asterisk/extensions_custom.conf
+
+service asterisk reload
 
 ###Issabel Menu
 echo "-------------Issabel Menu----------------"
