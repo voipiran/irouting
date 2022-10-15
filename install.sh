@@ -34,6 +34,9 @@ echo "------------Create DB-----------------"
 mysql -uroot -p$rootpw < installation/voipiran_irouting-database.sql
 mysql -uroot -p$rootpw -e "GRANT ALL PRIVILEGES ON voipiran_irouting.* TO 'root'@'localhost';"
 
+
+echo "Copy Files"
+echo "------------Files-----------------"
 ###Copy Files
 mkdir -p /var/www/voipiran
 mkdir -p /var/www/html/voipiran
