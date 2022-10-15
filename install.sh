@@ -37,12 +37,14 @@ mysql -uroot -p$rootpw -e "GRANT ALL PRIVILEGES ON voipiran_irouting.* TO 'root'
 mkdir -p /var/www/voipiran
 mkdir -p /var/www/html/voipiran
 mkdir -p /var/www/html/voipiran/irouting
+mkdir -p /var/www/voipiran/irouting
 
 yes | cp -avr public/* public/.htaccess /var/www/html/voipiran/irouting > /dev/null
 yes | cp -avr * .env /var/www/voipiran/irouting > /dev/null
 yes | rm -rf /var/www/voipiran/irouting/public > /dev/null
 
-$ ln -s /var/www/voipiran/irouting/storage/app storage
+ln -s /var/www/voipiran/irouting/storage/app /var/www/html/voipiran/irouting/storage
+
 
 yes | cp -rf -rf installation/vi-irouting.php /var/lib/asterisk/agi-bin
 
@@ -62,9 +64,6 @@ echo '<Directory "/var/www/html/voipiran/irouting">' >> /etc/httpd/conf.d/issabe
 echo 'AllowOverride All' >> /etc/httpd/conf.d/issabel-htaccess.conf
 echo '</Directory>' >> /etc/httpd/conf.d/issabel-htaccess.conf
 
-echo '<Directory "/var/www/html/voipiran/phone">' >> /etc/httpd/conf.d/issabel-htaccess.conf
-echo 'AllowOverride All' >> /etc/httpd/conf.d/issabel-htaccess.conf
-echo '</Directory>' >> /etc/httpd/conf.d/issabel-htaccess.conf
 
 #Create Database
 php /var/www/voipiran/irouting/artisan cache:clear
