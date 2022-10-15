@@ -40,7 +40,11 @@ echo "------------Files-----------------"
 ###Copy Files
 mkdir -p /var/www/voipiran
 mkdir -p /var/www/html/voipiran
+
+rm -rf /var/www/html/voipiran/irouting
 mkdir -p /var/www/html/voipiran/irouting
+
+rm -rf /var/www/voipiran/irouting
 mkdir -p /var/www/voipiran/irouting
 
 yes | cp -avr public/* public/.htaccess /var/www/html/voipiran/irouting > /dev/null
@@ -56,8 +60,8 @@ ln -s /var/www/voipiran/irouting/storage/app /var/www/html/voipiran/irouting/sto
 yes | cp -rf -rf installation/vi-irouting.php /var/lib/asterisk/agi-bin
 
 ###Add Permisions
-chmod -R 777 /var/www/voipiran
-chmod -R 777 /var/www/html/voipiran
+#chmod -R 777 /var/www/voipiran
+#chmod -R 777 /var/www/html/voipiran
 chmod -R 777 /var/www/voipiran/irouting/storage/app
 chmod -R 777 /var/www/voipiran/irouting/storage
 chmod 777 /var/lib/asterisk/agi-bin/vi-irouting.php
