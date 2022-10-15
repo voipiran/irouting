@@ -46,10 +46,17 @@ while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 	$timespan = $row["timespan"]-1;
 	$accept_digit = $row["accept_digit"];
 	$agent_num_prefix = $row["agent_num_prefix"];
+	if($agent_num_prefix =='_'){
+			$agent_num_prefix ='';
+	}
+
 	$play_agent_num = $row["play_agent_num"];
-	$prompt1 = $row["prompt1"];
-	$prompt2 = $row["prompt2"];
-	$prompt3 = $row["prompt3"];
+	//$prompt1 = $row["prompt1"];
+	$prompt1 = trim($row["prompt1"],".wav");
+	//$prompt2 = $row["prompt2"];
+	$prompt2 = trim($row["prompt2"],".wav");
+	//$prompt3 = $row["prompt3"];
+	$prompt3 = trim($row["prompt3"],".wav");
 
 	if ($row["route_name"] == 'last-talk-to') {
 //$agi->Verbose('###last-talk-to');
