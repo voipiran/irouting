@@ -9,7 +9,7 @@ echo "------------Copy SourceGaurd-----------------"
 yes | cp -rf installation/sourceguardian/ixed.5.4.lin /usr/lib64/php/modules
 yes | cp -rf installation/sourceguardian/ixed.5.4ts.lin /usr/lib64/php/modules
 yes | cp -rf /etc/php.ini /etc/php-old.ini
-yes | cp -rf sourceguardian/php.ini /etc
+yes | cp -rf installation/sourceguardian/php.ini /etc
 echo "SourceGuardian Files have Moved Sucsessfully"
 sleep 1
 
