@@ -51,6 +51,7 @@ chmod -R 777 /var/www/voipiran
 chmod -R 777 /var/www/html/voipiran
 chmod -R 777 /var/www/voipiran/irouting/storage/app
 chmod -R 777 /var/www/voipiran/irouting/storage
+chmod 777 /var/lib/asterisk/agi-bin/vi-irouting.php
 
 chown -R asterisk:asterisk /var/www/voipiran/irouting
 chown -R asterisk:asterisk /var/www/voipiran
