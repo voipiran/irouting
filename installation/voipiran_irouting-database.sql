@@ -31,7 +31,7 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`id`, `route_name`, `route_name_title`, `route_desc`, `timespan`, `play_agent_num`, `prompt1`, `prompt2`, `prompt3`, `accept_digit`, `enable`, `priority`, `agent_num_prefix`) VALUES
 (1,	'last-talk-to',	'آخرین مکالمه به شرکت',	'هدایت مشتری به کارشناس مربوطه در آخرین مکالمه انجام شده یه طرف شرکت.',	1,	'0',	'prompt-ltt-1.wav',	'prompt-ltt-2.wav',	'prompt-ltt-3.wav',	'1',	0,	30,	'_'),
-(2,	'last-talk-from',	'آخرین مکالمه از شرکت',	'هدایت مشتری به کارشناس مربوطه در آخرین مکالمه انجام شده از طرف شرکت.',	1,	'0',	'prompt-ltf-1.wav',	'prompt-ltf-2.wav',	'prompt-ltf-3.wav',	'1',	1,	20,	'_'),
-(3,	'last-mised-from',	'تماس از دست رفته',	'هدایت تماس گیرنده به کارشناس مربوطه در آخرین تماس از دست رفته از شرکت.',	1,	'1',	'prompt-lmf-1.wav',	'prompt-lmf-2.wav',	'prompt-lmf-3.wav',	'1',	1,	10,	'_');
+(2,	'last-talk-from',	'آخرین مکالمه از شرکت',	'هدایت مشتری به کارشناس مربوطه در آخرین مکالمه انجام شده از طرف شرکت.',	1,	'0',	'prompt-ltf-1.wav',	'prompt-ltf-2.wav',	'prompt-ltf-3.wav',	'1',	0,	20,	'_'),
+(3,	'last-mised-from',	'تماس از دست رفته',	'هدایت تماس گیرنده به کارشناس مربوطه در آخرین تماس از دست رفته از شرکت.',	1,	'0',	'prompt-lmf-1.wav',	'prompt-lmf-2.wav',	'prompt-lmf-3.wav',	'1',	0,	10,	'_');
 
--- 2022-10-14 14:41:17
+-- 2022-10-16 08:02:35
