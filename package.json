@@ -34,6 +34,7 @@
     "vue-regex-input": "^1.0.2",
     "vue-router": "4",
     "vue3-audio-player": "^1.0.5",
+    "vue-i18n": "9",
     "vue3-persian-datetime-picker": "^1.2.2",
     "vue3-simple-file-input": "^1.0.3"
   }

@@ -19,7 +19,7 @@ class LicenceMiddleWare
 	{
 		$callStatsLicense   = Licence::where('app', 'irouting')->first();
 		if (!$callStatsLicense) {
-			return abort(404, 'permission denied');
+			return abort(403, 'permission denied');
 		}
 
 		return $next($request);

@@ -197,6 +197,6 @@ return [
 
 	],
 
-	'API' => env("API", "/voipiran/irouting/"),
+	'API' => env("API", "/voipiran/irouting"),
 
 ];

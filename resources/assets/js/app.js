@@ -1,5 +1,7 @@
 import { createApp } from "vue";
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { createI18n } from 'vue-i18n'
+
 
 import Home from "../components/Home.vue";
 import About from "../components/About.vue";
@@ -23,7 +25,7 @@ const router = createRouter({
   routes, // short for `routes: routes`
 })
 
-export const app = createApp({
+const app = createApp({
   data() {
     return {
       message: "Hello Vue!",
@@ -35,6 +37,10 @@ export const app = createApp({
 // import Notifications
 import Notifications from '@kyvg/vue3-notification'
 app.use(Notifications)
+
+import langI18n from './I18_localization/langI18n.js'
+const i18n = createI18n(langI18n)
+app.use(i18n)
 
 app.use(router)
 app.mount("#app");

@@ -7,15 +7,15 @@
       <table>
         <thead class="">
           <tr class="text-center">
-            <th class="">نام مسیر</th>
-            <th class="">معرفی</th>
-            <th class="">بازه زمانی</th>
-            <th class="">بیان شماره کارشناس</th>
-            <th class="">عدد قبول درخواست</th>
-            <th class="">فعال</th>
-            <th class="">اولویت</th>
-            <th class="">بیان شماره کارشناس</th>
-            <th class="">عملیات</th>
+            <th class="">{{ $t('GENERAL.TODAY')  }}</th>
+            <th class="">{{ $t('SETTINGS.INTRODUCTION')  }}</th>
+            <th class="">{{ $t('SETTINGS.TIMESPAN')  }}</th>
+            <th class="">{{ $t("GENERAL.PLAY_AGENT_NUM")  }}</th>
+            <th class="">{{ $t("GENERAL.ACCEPT_DIGIT")  }}</th>
+            <th class="">{{ $t("SETTINGS.STATUS")  }}</th>
+            <th class="">{{ $t("GENERAL.PRIORITY")  }}</th>
+            <th class="">{{ $t("GENERAL.AGENT_NUM_PERFIX")  }}</th>
+            <th class="">{{ $t("SETTINGS.OPERATIONS")  }}</th>
           </tr>
         </thead>
         <tbody class="px-5">
@@ -23,13 +23,13 @@
             <td class="text-center">{{ item.route_name_title }}</td>
             <td class="text-center">{{ item.route_desc }}</td>
             <td class="text-center">{{ showLableDate(item.timespan) }}</td>
-            <td class="text-center">{{ item.play_agent_num == 1 ? 'فعال' : 'غیر فعال' }}</td>
-            <td class="text-center">{{ item.accept_digit == 'd' ? 'لطفا منتظر بمانید' : item.accept_digit }}</td>
-            <td class="text-center">{{ item.enable == 1 ? 'فعال' : 'غیر فعال' }}</td>
+            <td class="text-center">{{ item.play_agent_num == 1 ?  $t('SETTINGS.ENABLE')  :  $t('SETTINGS.DISABLE')  }}</td>
+            <td class="text-center">{{ item.accept_digit == 'd' ? $t("SETTINGS.PLEASE_WAIT") : item.accept_digit }}</td>
+            <td class="text-center">{{ item.enable == 1 ? $t('SETTINGS.ENABLE') : $t('SETTINGS.DISABLE') }}</td>
             <td class="text-center">{{ item.priority }}</td>
             <td class="text-center">{{ item.agent_num_prefix ? item.agent_num_prefix : '' }}</td>
             <td>
-              <RouterLink tag="Button" :to="{ name: 'SettingsEdit', params: { id: item.id } }" class="btn btn-warning">ویرایش</RouterLink>
+              <RouterLink tag="Button" :to="{ name: 'SettingsEdit', params: { id: item.id } }" class="btn btn-warning">{{ $t("GENERAL.EDIT") }}</RouterLink>
             </td>
           </tr>
         </tbody>
@@ -52,22 +52,22 @@ export default {
       let lable;
       switch (day) {
         case "1":
-          lable = 'امروز';
+          lable =  this.$t('GENERAL.TODAY');
           break;
         case "2":
-          lable = 'دیروز';
+          lable = this.$t('GENERAL.YESTERDAY');
           break;
         case "7":
-          lable = 'هفته گذشته';
+          lable = this.$t('GENERAL.LAST_WEEK');
           break;
         case "31":
-          lable = 'ماه گذشته';
+          lable = this.$t('GENERAL.LAST_MONTH');
           break;
         case "365":
-          lable = 'سال گذشته';
+          lable = this.$t('GENERAL.LAST_YEAR');
           break;
         default:
-          lable = `${day} روز گذشته`;
+          lable = `${day} ${this.$t("EDIT_SETTINGS.THE_DAY_BEFORE")}`;
           break;
       }
       return lable;

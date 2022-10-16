@@ -30,7 +30,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-responsive.css') }}" rel="stylesheet" />
     <script>
-        const API = "{{ config('app.API') }}"
+        const API = "{{ 'https://'.$_SERVER['HTTP_HOST'].config('app.API').'/' }}"
     </script>
 </head>
 

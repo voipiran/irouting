@@ -19,3 +19,5 @@ Route::controllers([
 Route::post('/uploads', 'Setting_Controller@uploads')->middleware('licence');
 
 Route::post('/settings/action', 'Setting_Controller@actions')->middleware('licence');
+
+

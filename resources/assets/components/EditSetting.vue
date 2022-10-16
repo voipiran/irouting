@@ -1,10 +1,9 @@
 <template>
   <div class="table-shadow mt-0">
     <notifications position="bottom left" :duration="5000" />
-
     <!-- title -->
     <div class="mb-5">
-      <h4>ویرایش {{ dataSetting ? dataSetting.route_name_title : '' }}</h4>
+      <h4>{{ $t("GENERAL.EDIT") }} {{ dataSetting ? dataSetting.route_name_title : '' }}</h4>
       <span class="p-2">{{ dataSetting ? dataSetting.route_desc : '' }}</span>
     </div>
 
@@ -13,7 +12,7 @@
       <div class="col-12 mx-auto">
         <form action="" class="rounded">
           <div class="d-flex px-5">
-            <label class="mx-3">وضعیت </label>
+            <label class="mx-3">{{ $t("SETTINGS.STATUS") }} </label>
             <Toggle v-model="statusSwitch" />
           </div>
           <div
@@ -35,7 +34,7 @@
                     setTimeDatePicker();
                   "
                 >
-                  روز جاری
+                  {{ $t("EDIT_SETTINGS.CURRENT_DAY") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '2' }"
@@ -45,7 +44,7 @@
                     setTimeDatePicker();
                   "
                 >
-                  دیروز
+                {{ $t("GENERAL.YESTERDAY") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '7' }"
@@ -55,7 +54,7 @@
                     setTimeDatePicker();
                   "
                 >
-                  یک هفته
+                {{ $t("EDIT_SETTINGS.A_WEEK") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '31' }"
@@ -65,7 +64,7 @@
                     setTimeDatePicker();
                   "
                 >
-                  یک ماه
+                {{ $t("EDIT_SETTINGS.A_MONTH") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '365' }"
@@ -75,7 +74,7 @@
                     setTimeDatePicker();
                   "
                 >
-                  یک سال
+                {{ $t("EDIT_SETTINGS.A_YEAR") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '9999' }"
@@ -85,75 +84,75 @@
                     setTimeDatePicker();
                   "
                 >
-                  بدون محدودیت
+                {{ $t("EDIT_SETTINGS.UNLIMITED") }}
                 </li>
               </ul>
             </div>
             <div class="col-12 date-holder" v-if="timeFilter == '9999'">
-              <label for="">لطفا روز مورد نظرتان را وارد نمایید </label>
+              <label for="">{{ $t("EDIT_SETTINGS.ENTER_A_DAY") }} </label>
               <vue-number-input v-model="getDay" controls max="999999999" min="0"></vue-number-input>
             </div>
           </div>
           <div class="d-flex mb-3">
-            <label class="mx-3">بیان شماره کارشناس</label>
+            <label class="mx-3">{{ $t("GENERAL.PLAY_AGENT_NUM") }}</label>
             <Toggle v-model="toggleSwitch" />
           </div>
           <div class="d-flex flex-column flex-md-row mt-5">
             <div class="col-12 col-md-4 mb-5">
               <div :class="{ pointer_event: toggleSwitch }">
-                <label class="mx-3">فایل صوتی 1</label>
-                <file-pond v-bind:files="promp1" :acceptedFileTypes="acceptedFileTypes" name="promp1" ref="promp1" label-idle="فایل مورد نظر را انتخاب کنید" v-bind:allow-multiple="false" :store-as-files="true" />
+                <label class="mx-3">{{ $t("EDIT_SETTINGS.PROMPT1") }}</label>
+                <file-pond v-bind:files="promp1" :acceptedFileTypes="acceptedFileTypes" name="promp1" ref="promp1" :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')" v-bind:allow-multiple="false" :store-as-files="true" />
               </div>
               <div :key="keyUpdateAudioPlayer">
                 <AudioPlayer v-model="audio1" :option="optionAudioPlayer1" />
               </div>
               <div class="d-flex justify-content-center">
-                <button @click.prevent="resetfunc(1)" class="btn btn-warning mt-3">تنظیمات اولیه</button>
+                <button @click.prevent="resetfunc(1)" class="btn btn-warning mt-3">{{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}</button>
               </div>
             </div>
 
             <div class="col-12 col-md-4 mb-5">
               <div :class="{ pointer_event: !toggleSwitch }">
-                <label class="mx-3">فایل صوتی 2a</label>
-                <file-pond v-bind:files="promp2" :accepted-file-types="acceptedFileTypes" name="promp2" ref="promp2" label-idle="فایل مورد نظر را انتخاب کنید" v-bind:allow-multiple="false" :store-as-files="true" />
+                <label class="mx-3">{{ $t("EDIT_SETTINGS.PROMPT2") }}</label>
+                <file-pond v-bind:files="promp2" :accepted-file-types="acceptedFileTypes" name="promp2" ref="promp2" :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')" v-bind:allow-multiple="false" :store-as-files="true" />
               </div>
               <div :key="keyUpdateAudioPlayer">
                 <AudioPlayer v-model="audio2" :option="optionAudioPlayer2" />
               </div>
               <div class="d-flex justify-content-center">
-                <button @click.prevent="resetfunc(2)" class="btn btn-warning mt-3">تنظیمات اولیه</button>
+                <button @click.prevent="resetfunc(2)" class="btn btn-warning mt-3">{{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}</button>
               </div>
             </div>
             <div class="col-12 col-md-4 mb-5">
               <div :class="{ pointer_event: !toggleSwitch }">
-                <label class="mx-3">فایل صوتی 2b</label>
-                <file-pond v-bind:files="promp3" :accepted-file-types="acceptedFileTypes" name="promp3" ref="promp3" label-idle="فایل مورد نظر را انتخاب کنید" v-bind:allow-multiple="false" :store-as-files="true" />
+                <label class="mx-3">{{ $t("EDIT_SETTINGS.PROMPT3") }}</label>
+                <file-pond v-bind:files="promp3" :accepted-file-types="acceptedFileTypes" name="promp3" ref="promp3" :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')" v-bind:allow-multiple="false" :store-as-files="true" />
               </div>
               <div :key="keyUpdateAudioPlayer">
                 <AudioPlayer v-model="audio3" :option="optionAudioPlayer3" />
               </div>
               <div class="d-flex justify-content-center">
-                <button @click.prevent="resetfunc(3)" class="btn btn-warning mt-3">تنظیمات اولیه</button>
+                <button @click.prevent="resetfunc(3)" class="btn btn-warning mt-3">{{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}</button>
               </div>
             </div>
           </div>
           <div class="d-flex flex-column flex-md-row">
             <div class="col-12 col-md-4 mb-5 mb-md-0" dir="rtl">
-              <label class="mx-3">عدد قبول درخواست</label>
+              <label class="mx-3">{{ $t("GENERAL.ACCEPT_DIGIT") }}</label>
               <Multiselect v-model="numberAccept" :options="options" />
             </div>
             <div class="col-12 col-md-4 mb-5 mb-md-0" dir="rtl">
-              <label class="mx-3">اولویت</label>
+              <label class="mx-3">{{ $t("GENERAL.PRIORITY") }}</label>
               <Multiselect v-model="numbers" :options="numberArray" />
             </div>
             <div class="col-12 col-md-4 date-holder mb-3 mb-md-4">
-              <label class="mx-3">پیش شماره کارشناس</label>
+              <label class="mx-3">{{ $t("GENERAL.AGENT_NUM_PERFIX") }}</label>
               <vue-number-input v-model="chooseNumber" controls max="999999999" min="0"></vue-number-input>
             </div>
           </div>
           <div class="mb-3 mb-md-0 d-flex">
-            <button @click.prevent="submit()" class="btn btn-warning mx-2">ویرایش</button>
-            <button class="btn btn-warning btn-back" @click="$router.push({ path: '/settings' })">بازگشت</button>
+            <button @click.prevent="submit()" class="btn btn-warning mx-2">{{ $t("GENERAL.EDIT") }}</button>
+            <button class="btn btn-warning btn-back" @click="$router.push({ path: '/settings' })">{{ $t("EDIT_SETTINGS.BACK") }}</button>
           </div>
         </form>
       </div>
@@ -209,7 +208,7 @@ export default {
         "9",
         "#",
         "*",
-        "منتظر بمانید",
+        this.$t('SETTINGS.PLEASE_WAIT'),
       ],
       numberArray: ["10", "20", "30", "40", "50", "60", "70", "80", "90"],
       optionAudioPlayer1: { src: null },
@@ -243,7 +242,7 @@ export default {
           : (this.statusSwitch = false);
         this.numberAccept =
           this.dataSetting.accept_digit == "d"
-            ? "منتظر بمانید"
+            ? this.$t('SETTINGS.PLEASE_WAIT')
             : this.dataSetting.accept_digit;
         this.chooseNumber = this.dataSetting.agent_num_prefix;
         this.numbers = this.dataSetting.priority;
@@ -301,7 +300,7 @@ export default {
         data.append(
           "accept_digit",
           this.numberAccept
-            ? this.numberAccept == "منتظر بمانید"
+            ? this.numberAccept == this.$t('SETTINGS.PLEASE_WAIT')
               ? "disabled"
               : this.numberAccept
             : "0"
@@ -319,7 +318,7 @@ export default {
         });
         console.log(result);
         this.$notify({
-          text: "عملیات با موفقیت انجام شد",
+          text: this.$t("EDIT_SETTINGS.MISSION_COMPLETE"),
           type: "success",
         });
         this.getData();
