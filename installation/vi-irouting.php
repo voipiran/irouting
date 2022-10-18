@@ -52,11 +52,11 @@ while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
 
 	$play_agent_num = $row["play_agent_num"];
 	//$prompt1 = $row["prompt1"];
-	$prompt1 = trim($row["prompt1"],".wav");
+	$prompt1 = str_replace('.wav', '', $row["prompt1"]);
 	//$prompt2 = $row["prompt2"];
-	$prompt2 = trim($row["prompt2"],".wav");
+	$prompt2 = str_replace('.wav', '', $row["prompt2"]);
 	//$prompt3 = $row["prompt3"];
-	$prompt3 = trim($row["prompt3"],".wav");
+	$prompt3 = str_replace('.wav', '', $row["prompt3"]);
 
 	if ($row["route_name"] == 'last-talk-to') {
 //$agi->Verbose('###last-talk-to');
@@ -130,7 +130,7 @@ function askAndGo()
 		}
  		
 		/*If Accept Digits is d and Caller enter Nothing*/
-		if ($confirm == NULL && $accept_digit=='d') {
+		if ($confirm != NULL && $accept_digit=='d') {
 			$agi->exec_goto('from-internal-additional', $agent_num_prefix . $agentNum, '1');
 		}
 
