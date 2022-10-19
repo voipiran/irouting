@@ -7,17 +7,17 @@ use App\SettingDbNumberformatter;
 use App\User;
 
 
-Route::get('/', 'HomeController@index')->middleware('licence');
+Route::get('/', 'HomeController@index');
 
-Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('licence');;
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');;
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::post('/uploads', 'Setting_Controller@uploads')->middleware('licence');
+Route::post('/uploads', 'Setting_Controller@uploads');
 
-Route::post('/settings/action', 'Setting_Controller@actions')->middleware('licence');
+Route::post('/settings/action', 'Setting_Controller@actions');
 
 

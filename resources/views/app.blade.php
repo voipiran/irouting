@@ -12,6 +12,7 @@
     <meta name="token" content="{{ csrf_token() }}">
 
 
+
     <title>Irouting</title>
 
     <!-- Bootstrap core CSS -->
@@ -19,7 +20,8 @@
     <link href="{{ asset('css/bootstrap-reset.css') }}" rel="stylesheet">
     <!--external css-->
     <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css') }}" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{ asset('assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css') }}" rel="stylesheet" type="text/css"
+        media="screen" />
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}" type="text/css">
 
     <!--right slidebar-->
@@ -30,7 +32,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-responsive.css') }}" rel="stylesheet" />
     <script>
-        const API = "{{ 'https://'.$_SERVER['HTTP_HOST'].config('app.API').'/' }}"
+        const API = "{{ $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . config('app.API') . '/' }}"
     </script>
 </head>
 
@@ -68,7 +70,9 @@
                                             <div class="percent">40%</div>
                                         </div>
                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 40%">
                                                 <span class="sr-only">40% Complete (success)</span>
                                             </div>
                                         </div>
@@ -81,7 +85,9 @@
                                             <div class="percent">60%</div>
                                         </div>
                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar"
+                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 60%">
                                                 <span class="sr-only">60% Complete (warning)</span>
                                             </div>
                                         </div>
@@ -94,7 +100,9 @@
                                             <div class="percent">87%</div>
                                         </div>
                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 87%">
+                                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+                                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 87%">
                                                 <span class="sr-only">87% Complete</span>
                                             </div>
                                         </div>
@@ -107,7 +115,9 @@
                                             <div class="percent">33%</div>
                                         </div>
                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 33%">
+                                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar"
+                                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 33%">
                                                 <span class="sr-only">33% Complete (danger)</span>
                                             </div>
                                         </div>
@@ -120,7 +130,9 @@
                                             <div class="percent">45%</div>
                                         </div>
                                         <div class="progress">
-                                            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                            <div class="progress-bar progress-bar-striped" role="progressbar"
+                                                aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 45%">
                                                 <span class="sr-only">45% Complete</span>
                                             </div>
                                         </div>
@@ -389,7 +401,8 @@
                                 <div class="percent">40%</div>
                             </div>
                             <div class="progress">
-                                <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" role="progressbar" class="progress-bar progress-bar-striped bg-success">
+                                <div style="width: 40%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40"
+                                    role="progressbar" class="progress-bar progress-bar-striped bg-success">
                                     <span class="sr-only">40% Complete (success)</span>
                                 </div>
                             </div>
@@ -402,7 +415,8 @@
                                 <div class="percent">60%</div>
                             </div>
                             <div class="progress">
-                                <div style="width: 60%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" role="progressbar" class="progress-bar progress-bar-striped bg-warning">
+                                <div style="width: 60%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60"
+                                    role="progressbar" class="progress-bar progress-bar-striped bg-warning">
                                     <span class="sr-only">60% Complete (warning)</span>
                                 </div>
                             </div>
@@ -415,7 +429,8 @@
                                 <div class="percent">87%</div>
                             </div>
                             <div class="progress">
-                                <div style="width: 87%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20" role="progressbar" class="progress-bar progress-bar-striped bg-info">
+                                <div style="width: 87%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="20"
+                                    role="progressbar" class="progress-bar progress-bar-striped bg-info">
                                     <span class="sr-only">87% Complete</span>
                                 </div>
                             </div>
@@ -428,7 +443,8 @@
                                 <div class="percent">33%</div>
                             </div>
                             <div class="progress">
-                                <div style="width: 33%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80" role="progressbar" class="progress-bar progress-bar-striped bg-danger">
+                                <div style="width: 33%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="80"
+                                    role="progressbar" class="progress-bar progress-bar-striped bg-danger">
                                     <span class="sr-only">33% Complete (danger)</span>
                                 </div>
                             </div>
@@ -441,7 +457,8 @@
                                 <div class="percent">45%</div>
                             </div>
                             <div class="progress">
-                                <div style="width: 45%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar" class="progress-bar progress-bar-striped">
+                                <div style="width: 45%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45"
+                                    role="progressbar" class="progress-bar progress-bar-striped">
                                     <span class="sr-only">45% Complete</span>
                                 </div>
                             </div>

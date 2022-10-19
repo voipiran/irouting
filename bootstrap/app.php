@@ -52,4 +52,5 @@ $app->singleton(
 |
 */
 
+header('Access-Control-Allow-Origin: *');
 return $app;

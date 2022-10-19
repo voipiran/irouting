@@ -21,7 +21,7 @@ export default {
        OPERATIONS : 'Operations' ,
        ENABLE : "Enable" ,
        DISABLE : "Disable",
-       PLEASE_WAIT :"Please Wait" ,
+       All_NUM : "All of Number" ,
     },
     EDIT_SETTINGS : {
        CURRENT_DAY : "Current Day" ,
@@ -39,5 +39,6 @@ export default {
        MISSION_COMPLETE : "Mission Complete" ,
        THE_DAY_BEFORE : 'The Day before' ,
        CHOOSE_FILE : "Please Choose Your File" , 
+       FORMAT_FILE : "The format of audio files should be wav, 8Khz, Mono, 16-Bit."
     },
 }

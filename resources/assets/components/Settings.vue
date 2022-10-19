@@ -1,13 +1,13 @@
 <template>
   <div class="table-shadow">
     <div class="pb-4">
-      <h3>تنظیمات</h3>
+      <h3>{{ $t("SETTINGS.TITLE") }}</h3>
     </div>
     <div>
       <table>
         <thead class="">
           <tr class="text-center">
-            <th class="">{{ $t('GENERAL.TODAY')  }}</th>
+            <th class="">{{ $t('SETTINGS.ROUTE_NAME')  }}</th>
             <th class="">{{ $t('SETTINGS.INTRODUCTION')  }}</th>
             <th class="">{{ $t('SETTINGS.TIMESPAN')  }}</th>
             <th class="">{{ $t("GENERAL.PLAY_AGENT_NUM")  }}</th>
@@ -24,7 +24,7 @@
             <td class="text-center">{{ item.route_desc }}</td>
             <td class="text-center">{{ showLableDate(item.timespan) }}</td>
             <td class="text-center">{{ item.play_agent_num == 1 ?  $t('SETTINGS.ENABLE')  :  $t('SETTINGS.DISABLE')  }}</td>
-            <td class="text-center">{{ item.accept_digit == 'd' ? $t("SETTINGS.PLEASE_WAIT") : item.accept_digit }}</td>
+            <td class="text-center">{{ item.accept_digit == 'd' ? $t("SETTINGS.All_NUM") : item.accept_digit }}</td>
             <td class="text-center">{{ item.enable == 1 ? $t('SETTINGS.ENABLE') : $t('SETTINGS.DISABLE') }}</td>
             <td class="text-center">{{ item.priority }}</td>
             <td class="text-center">{{ item.agent_num_prefix ? item.agent_num_prefix : '' }}</td>

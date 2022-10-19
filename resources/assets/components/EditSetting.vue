@@ -3,8 +3,11 @@
     <notifications position="bottom left" :duration="5000" />
     <!-- title -->
     <div class="mb-5">
-      <h4>{{ $t("GENERAL.EDIT") }} {{ dataSetting ? dataSetting.route_name_title : '' }}</h4>
-      <span class="p-2">{{ dataSetting ? dataSetting.route_desc : '' }}</span>
+      <h4>
+        {{ $t("GENERAL.EDIT") }}
+        {{ dataSetting ? dataSetting.route_name_title : "" }}
+      </h4>
+      <span class="p-2">{{ dataSetting ? dataSetting.route_desc : "" }}</span>
     </div>
 
     <!-- content -->
@@ -19,7 +22,7 @@
             class="timeFilter row mb-3"
             :class="{
               'loading-Calc-Date': loadingCalcDate,
-              pointer_event: !statusSwitch
+              pointer_event: !statusSwitch,
             }"
           >
             <div class="col-12">
@@ -44,7 +47,7 @@
                     setTimeDatePicker();
                   "
                 >
-                {{ $t("GENERAL.YESTERDAY") }}
+                  {{ $t("GENERAL.YESTERDAY") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '7' }"
@@ -54,7 +57,7 @@
                     setTimeDatePicker();
                   "
                 >
-                {{ $t("EDIT_SETTINGS.A_WEEK") }}
+                  {{ $t("EDIT_SETTINGS.A_WEEK") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '31' }"
@@ -64,7 +67,7 @@
                     setTimeDatePicker();
                   "
                 >
-                {{ $t("EDIT_SETTINGS.A_MONTH") }}
+                  {{ $t("EDIT_SETTINGS.A_MONTH") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '365' }"
@@ -74,7 +77,7 @@
                     setTimeDatePicker();
                   "
                 >
-                {{ $t("EDIT_SETTINGS.A_YEAR") }}
+                  {{ $t("EDIT_SETTINGS.A_YEAR") }}
                 </li>
                 <li
                   :class="{ active: timeFilter == '9999' }"
@@ -84,55 +87,122 @@
                     setTimeDatePicker();
                   "
                 >
-                {{ $t("EDIT_SETTINGS.UNLIMITED") }}
+                  {{ $t("EDIT_SETTINGS.UNLIMITED") }}
                 </li>
               </ul>
             </div>
             <div class="col-12 date-holder" v-if="timeFilter == '9999'">
               <label for="">{{ $t("EDIT_SETTINGS.ENTER_A_DAY") }} </label>
-              <vue-number-input v-model="getDay" controls max="999999999" min="0"></vue-number-input>
+              <vue-number-input
+                v-model="getDay"
+                controls
+                max="999999999"
+                min="0"
+              ></vue-number-input>
             </div>
           </div>
           <div class="d-flex mb-3">
             <label class="mx-3">{{ $t("GENERAL.PLAY_AGENT_NUM") }}</label>
             <Toggle v-model="toggleSwitch" />
           </div>
-          <div class="d-flex flex-column flex-md-row mt-5">
+          <div class="d-flex flex-column flex-md-row">
             <div class="col-12 col-md-4 mb-5">
               <div :class="{ pointer_event: toggleSwitch }">
                 <label class="mx-3">{{ $t("EDIT_SETTINGS.PROMPT1") }}</label>
-                <file-pond v-bind:files="promp1" :acceptedFileTypes="acceptedFileTypes" name="promp1" ref="promp1" :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')" v-bind:allow-multiple="false" :store-as-files="true" />
+                <file-pond
+                  :server="server"
+                  :acceptedFileTypes="acceptedFileTypes"
+                  name="promp1"
+                  ref="promp1"
+                  :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')"
+                  v-bind:allow-multiple="false"
+                  :store-as-files="true"
+                  @processfiles="loadAudio(1)"
+                />
+                <p>
+                  {{ $t("EDIT_SETTINGS.FORMAT_FILE") }}
+                </p>
               </div>
               <div :key="keyUpdateAudioPlayer">
-                <AudioPlayer v-model="audio1" :option="optionAudioPlayer1" />
+                <AudioPlayer
+                  loadedmetadata
+                  v-model="audio1"
+                  :option="optionAudioPlayer1"
+                />
               </div>
               <div class="d-flex justify-content-center">
-                <button @click.prevent="resetfunc(1)" class="btn btn-warning mt-3">{{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}</button>
+                <button
+                  @click.prevent="resetfunc(1)"
+                  class="btn btn-warning mt-3"
+                >
+                  {{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}
+                </button>
               </div>
             </div>
-
             <div class="col-12 col-md-4 mb-5">
               <div :class="{ pointer_event: !toggleSwitch }">
                 <label class="mx-3">{{ $t("EDIT_SETTINGS.PROMPT2") }}</label>
-                <file-pond v-bind:files="promp2" :accepted-file-types="acceptedFileTypes" name="promp2" ref="promp2" :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')" v-bind:allow-multiple="false" :store-as-files="true" />
+                <file-pond
+                  :server="server"
+                  :accepted-file-types="acceptedFileTypes"
+                  name="promp2"
+                  ref="promp2"
+                  :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')"
+                  v-bind:allow-multiple="false"
+                  :store-as-files="true"
+                  @processfiles="loadAudio(2)"
+                />
+                <p class="text-format">
+                  {{ $t("EDIT_SETTINGS.FORMAT_FILE") }}
+                </p>
               </div>
               <div :key="keyUpdateAudioPlayer">
-                <AudioPlayer v-model="audio2" :option="optionAudioPlayer2" />
+                <AudioPlayer
+                  loadedmetadata
+                  v-model="audio2"
+                  :option="optionAudioPlayer2"
+                />
               </div>
               <div class="d-flex justify-content-center">
-                <button @click.prevent="resetfunc(2)" class="btn btn-warning mt-3">{{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}</button>
+                <button
+                  @click.prevent="resetfunc(2)"
+                  class="btn btn-warning mt-3"
+                >
+                  {{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}
+                </button>
               </div>
             </div>
             <div class="col-12 col-md-4 mb-5">
               <div :class="{ pointer_event: !toggleSwitch }">
                 <label class="mx-3">{{ $t("EDIT_SETTINGS.PROMPT3") }}</label>
-                <file-pond v-bind:files="promp3" :accepted-file-types="acceptedFileTypes" name="promp3" ref="promp3" :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')" v-bind:allow-multiple="false" :store-as-files="true" />
+                <file-pond
+                  :server="server"
+                  :accepted-file-types="acceptedFileTypes"
+                  name="promp3"
+                  ref="promp3"
+                  :label-idle="$t('EDIT_SETTINGS.CHOOSE_FILE')"
+                  v-bind:allow-multiple="false"
+                  :store-as-files="true"
+                  @processfiles="loadAudio(3)"
+                />
+                <p class="text-format">
+                  {{ $t("EDIT_SETTINGS.FORMAT_FILE") }}
+                </p>
               </div>
               <div :key="keyUpdateAudioPlayer">
-                <AudioPlayer v-model="audio3" :option="optionAudioPlayer3" />
+                <AudioPlayer
+                  loadedmetadata
+                  v-model="audio3"
+                  :option="optionAudioPlayer3"
+                />
               </div>
               <div class="d-flex justify-content-center">
-                <button @click.prevent="resetfunc(3)" class="btn btn-warning mt-3">{{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}</button>
+                <button
+                  @click.prevent="resetfunc(3)"
+                  class="btn btn-warning mt-3"
+                >
+                  {{ $t("EDIT_SETTINGS.INITIAL_SETTINGS") }}
+                </button>
               </div>
             </div>
           </div>
@@ -147,12 +217,24 @@
             </div>
             <div class="col-12 col-md-4 date-holder mb-3 mb-md-4">
               <label class="mx-3">{{ $t("GENERAL.AGENT_NUM_PERFIX") }}</label>
-              <vue-number-input v-model="chooseNumber" controls max="999999999" min="0"></vue-number-input>
+              <vue-number-input
+                v-model="chooseNumber"
+                controls
+                max="999999999"
+                min="0"
+              ></vue-number-input>
             </div>
           </div>
           <div class="mb-3 mb-md-0 d-flex">
-            <button @click.prevent="submit()" class="btn btn-warning mx-2">{{ $t("GENERAL.EDIT") }}</button>
-            <button class="btn btn-warning btn-back" @click="$router.push({ path: '/settings' })">{{ $t("EDIT_SETTINGS.BACK") }}</button>
+            <button @click.prevent="submit()" class="btn btn-warning mx-2">
+              {{ $t("GENERAL.EDIT") }}
+            </button>
+            <button
+              class="btn btn-warning btn-back"
+              @click="$router.push({ path: '/settings' })"
+            >
+              {{ $t("EDIT_SETTINGS.BACK") }}
+            </button>
           </div>
         </form>
       </div>
@@ -185,9 +267,9 @@ export default {
       statusSwitch: false,
       timeFilter: 0,
       loadingCalcDate: null,
-      promp1: null,
-      promp2: null,
-      promp3: null,
+      promp1: 1,
+      promp2: 2,
+      promp3: 3,
       getDay: null,
       toggleSelected: null,
       valueOfNumber: null,
@@ -208,17 +290,27 @@ export default {
         "9",
         "#",
         "*",
-        this.$t('SETTINGS.PLEASE_WAIT'),
+        this.$t("SETTINGS.All_NUM"),
       ],
       numberArray: ["10", "20", "30", "40", "50", "60", "70", "80", "90"],
       optionAudioPlayer1: { src: null },
       optionAudioPlayer2: { src: null },
       optionAudioPlayer3: { src: null },
       keyUpdateAudioPlayer: 0,
-
-      acceptedFileTypes: [
-        "audio/*",
-      ]
+      acceptedFileTypes: ["audio/wav"],
+      server: {
+        url: `${API}uploads`,
+        method: "POST",
+        headers: {
+          "X-CSRF-TOKEN": $('meta[name="token"]').attr("content"),
+        },
+        process: {
+          ondata: (formdata) => {
+            formdata.append("id", this.$route.params.id);
+            return formdata;
+          },
+        },
+      },
     };
   },
   methods: {
@@ -242,7 +334,7 @@ export default {
           : (this.statusSwitch = false);
         this.numberAccept =
           this.dataSetting.accept_digit == "d"
-            ? this.$t('SETTINGS.PLEASE_WAIT')
+            ? this.$t("SETTINGS.All_NUM")
             : this.dataSetting.accept_digit;
         this.chooseNumber = this.dataSetting.agent_num_prefix;
         this.numbers = this.dataSetting.priority;
@@ -258,7 +350,6 @@ export default {
         console.log(error);
       }
     },
-
     async resetfunc(audio) {
       try {
         await axios({
@@ -280,18 +371,10 @@ export default {
       try {
         if (this.isLoading) return;
         this.isLoading = true;
-
-        let file1 = this.$refs.promp1.getFile();
-        let file2 = this.$refs.promp2.getFile();
-        let file3 = this.$refs.promp3.getFile();
         let data = new FormData();
         let id = this.$route.params.id;
         data.append("id", id);
-        data.append("file1", file1 ? file1.file : "");
-        data.append("file2", file2 ? file2.file : "");
-        data.append("file3", file3 ? file3.file : "");
         data.append("enable", this.statusSwitch);
-        // data.append("getDay", this.getDay)
         data.append(
           "timespan",
           this.timeFilter == "9999" ? this.getDay : this.timeFilter
@@ -300,29 +383,28 @@ export default {
         data.append(
           "accept_digit",
           this.numberAccept
-            ? this.numberAccept == this.$t('SETTINGS.PLEASE_WAIT')
+            ? this.numberAccept == this.$t("SETTINGS.All_NUM")
               ? "disabled"
               : this.numberAccept
             : "0"
         );
         data.append(
           "agent_num_prefix",
-          this.chooseNumber ? this.chooseNumber : '_'
+          this.chooseNumber ? this.chooseNumber : "_"
         );
         data.append("priority", this.numbers ? this.numbers : null);
         data.append("method", "uploadAndEdit");
-        let result = await axios({
+        await axios({
           method: "post",
           url: `${API}/settings/action`,
           data: data,
         });
-        console.log(result);
         this.$notify({
           text: this.$t("EDIT_SETTINGS.MISSION_COMPLETE"),
           type: "success",
         });
         this.getData();
-        return this.$router.push({ path: '/settings' })
+        return this.$router.push({ path: "/settings" });
       } catch (error) {
         console.error(error);
       }
@@ -352,19 +434,57 @@ export default {
       }
       this.loadingCalcDate = false;
     },
+    /** load audio uploaded and change component audio */
+    loadAudio(index) {
+      let nameFile;
+      let id = this.$route.params.id;
+      switch (id) {
+        case "1":
+          nameFile = "prompt-ltt";
+          break;
+        case "2":
+          nameFile = "prompt-ltf";
+          break;
+        case "3":
+          nameFile = "prompt-lmf";
+          break;
+        default:
+          nameFile = null;
+      }
+
+      this.keyUpdateAudioPlayer++;
+      switch (index) {
+        case 1:    
+           this.optionAudioPlayer1.src = `${API}storage/${nameFile}-${index}-New.wav?v=${this.keyUpdateAudioPlayer}`;
+          break;
+        case 2:
+          this.optionAudioPlayer2.src = `${API}storage/${nameFile}-${index}-New.wav?v=${this.keyUpdateAudioPlayer}`;
+          break;
+        case 3:
+          this.optionAudioPlayer3.src = `${API}storage/${nameFile}-${index}-New.wav?v=${this.keyUpdateAudioPlayer}`;
+          break;
+
+        default:
+          break;
+      }
+      console.log(this.$route.params.id);
+      console.log("nameFile", nameFile);
+      console.log(index);
+    },
   },
   async mounted() {
+    console.log(this.server);
     await this.getData();
   },
 };
 </script>
 
 <style lang="scss">
-@import '@vueform/toggle/themes/default.css';
-@import '~vue-multiselect/dist/vue-multiselect.css';
-@import '@vueform/multiselect/themes/default.css';
-@import '~filepond/dist/filepond.min.css';
-@import '~filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+@import "@vueform/toggle/themes/default.css";
+@import "~vue-multiselect/dist/vue-multiselect.css";
+@import "@vueform/multiselect/themes/default.css";
+@import "~filepond/dist/filepond.min.css";
+@import "~filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
 
 .timeFilter {
   padding: 20px;
@@ -412,5 +532,8 @@ export default {
     border: 1px solid rgb(67, 67, 67);
     color: black;
   }
+}
+.text-format {
+  visibility: hidden;
 }
 </style>

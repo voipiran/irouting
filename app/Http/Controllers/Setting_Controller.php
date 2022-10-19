@@ -84,9 +84,6 @@ class Setting_Controller extends Controller
 	{
 		try {
 
-			/** upload file */
-			$upload =	$this->uploads($request);
-
 			/** edit table */
 			$data = Setting_::findOrFail($request->id);
 
@@ -101,9 +98,8 @@ class Setting_Controller extends Controller
 			if ($request->priority)
 				$data->priority = $request->priority;
 
-			
-				$data->timespan = $request->timespan;
 
+			$data->timespan = $request->timespan;
 
 			$data->save();
 
@@ -111,7 +107,6 @@ class Setting_Controller extends Controller
 				'status' => 200,
 				'message' => 'success',
 				'data' => $data,
-				'upload' => $upload
 			];
 		} catch (\Throwable $th) {
 			return [
@@ -166,12 +161,11 @@ class Setting_Controller extends Controller
 		}
 	}
 
-	public function uploads($request)
+	public function uploads(Request $request)
 	{
 		try {
-
-			$data = Setting_::findOrFail($request->id);
-			/* set file name with id */
+			$data = Setting_::find($request->id);
+			
 			switch ($request->id) {
 				case 1:
 					$nameFile = "prompt-ltt";
@@ -185,44 +179,49 @@ class Setting_Controller extends Controller
 				default:
 					$nameFile  = null;
 			}
-			$path = '';
-			if ($request->file('file1')) {
+			if ($request->file('promp1')) {
 				$files =  storage_path("app/$nameFile-1-New.wav");
 				if (File::exists($files)) {
 					Storage::disk('local')->delete("$nameFile-1-New.wav");
 				}
 
-				$path = Storage::disk('local')->put("$nameFile-1-New.wav", \File::get($request->file('file1')));
+				 Storage::disk('local')->put("$nameFile-1-New.wav", \File::get($request->file('promp1')));
 
 
 				$data->prompt1 = "$nameFile-1-New.wav";
 			}
-			if ($request->file('file2')) {
+			if ($request->file('promp2')) {
 				$files =  storage_path("app/$nameFile-2-New.wav");
 				if (File::exists($files)) {
 					Storage::disk('local')->delete("$nameFile-2-New.wav");
 				}
 
-				$path = Storage::disk('local')->put("$nameFile-2-New.wav", \File::get($request->file('file2')));
+				 Storage::disk('local')->put("$nameFile-2-New.wav", \File::get($request->file('promp2')));
 				$data->prompt2 = "$nameFile-2-New.wav";
 			}
-			if ($request->file('file3')) {
+			if ($request->file('promp3')) {
 
 				$files =  storage_path("app/$nameFile-3-New.wav");
 				if (File::exists($files)) {
 					Storage::disk('local')->delete("$nameFile-3-New.wav");
 				}
 
-				$path = Storage::disk('local')->put("$nameFile-3-New.wav", \File::get($request->file('file3')));
+				  Storage::disk('local')->put("$nameFile-3-New.wav", \File::get($request->file('promp3')));
 
 				$data->prompt3 = "$nameFile-3-New.wav";
 			}
 
-			$data->save();
+			$data->save(); 
 
-			return 'success';
+			return response()->json([
+				'status'  => 200,
+				'message' => 'success',
+				 "data" => $data,
+			], 200);
 		} catch (\Throwable $th) {
 			return 'unSuccess';
 		}
+
+			
 	}
 }
