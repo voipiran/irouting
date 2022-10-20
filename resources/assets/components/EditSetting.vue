@@ -1,5 +1,9 @@
 <template>
   <div class="table-shadow mt-0">
+    <div class="alert d-flex justify-content-between align-items-baseline w-25 alert-message" v-if="showMessage" role="alert">
+             <p class="text-white">{{ $t("EDIT_SETTINGS.FILE_UPLOADED") }}</p>
+            <span @click="showMessage=false" class="bg-light rounded-circle py-1 px-2">X</span>
+         </div>
     <notifications position="bottom left" :duration="5000" />
     <!-- title -->
     <div class="mb-5">
@@ -265,11 +269,9 @@ export default {
       selectTime: false,
       toggleSwitch: false,
       statusSwitch: false,
+      showMessage : false ,
       timeFilter: 0,
       loadingCalcDate: null,
-      promp1: 1,
-      promp2: 2,
-      promp3: 3,
       getDay: null,
       toggleSelected: null,
       valueOfNumber: null,
@@ -277,6 +279,9 @@ export default {
       numbers: null,
       chooseNumber: null,
       numberAccept: null,
+      audio1: null,
+      audio2: null,
+      audio3: null,
       options: [
         "0",
         "1",
@@ -326,20 +331,23 @@ export default {
           },
         });
         this.dataSetting = result.data.data;
+
         this.dataSetting.play_agent_num == "1"
           ? (this.toggleSwitch = true)
           : (this.toggleSwitch = false);
+
         this.dataSetting.enable == "1"
           ? (this.statusSwitch = true)
           : (this.statusSwitch = false);
+
         this.numberAccept =
           this.dataSetting.accept_digit == "d"
             ? this.$t("SETTINGS.All_NUM")
             : this.dataSetting.accept_digit;
+
         this.chooseNumber = this.dataSetting.agent_num_prefix;
         this.numbers = this.dataSetting.priority;
         this.timeFilter = this.dataSetting.timespan;
-
         this.setTimeDatePicker();
 
         this.optionAudioPlayer1.src = `${API}storage/${this.dataSetting.prompt1}?v=${this.keyUpdateAudioPlayer}`;
@@ -361,6 +369,7 @@ export default {
             audioNum: audio,
           },
         });
+
         this.getData();
       } catch (error) {
         console.log(error);
@@ -451,11 +460,10 @@ export default {
         default:
           nameFile = null;
       }
-
       this.keyUpdateAudioPlayer++;
       switch (index) {
-        case 1:    
-           this.optionAudioPlayer1.src = `${API}storage/${nameFile}-${index}-New.wav?v=${this.keyUpdateAudioPlayer}`;
+        case 1:
+          this.optionAudioPlayer1.src = `${API}storage/${nameFile}-${index}-New.wav?v=${this.keyUpdateAudioPlayer}`;
           break;
         case 2:
           this.optionAudioPlayer2.src = `${API}storage/${nameFile}-${index}-New.wav?v=${this.keyUpdateAudioPlayer}`;
@@ -466,14 +474,12 @@ export default {
 
         default:
           break;
-      }
-      console.log(this.$route.params.id);
-      console.log("nameFile", nameFile);
-      console.log(index);
+      }   
+       this.showMessage = true ;
+      this.$refs[`promp${index}`].removeFile();
     },
   },
   async mounted() {
-    console.log(this.server);
     await this.getData();
   },
 };
@@ -535,5 +541,15 @@ export default {
 }
 .text-format {
   visibility: hidden;
+}
+.alert-message {
+  background-color:#6ae26a;
+  position: fixed;
+  left: 57%;
+  top:60px;
+  z-index: 10;
+  span {
+    cursor: pointer;
+  }
 }
 </style>

@@ -39,6 +39,7 @@ export default {
        MISSION_COMPLETE : "عملیات با موفقیت انجام شد" ,
        THE_DAY_BEFORE : 'روز گذشته' ,
        CHOOSE_FILE : "فایل مورد نظر را انتخاب کنید" , 
-       FORMAT_FILE : "فرمت فایل های صوتی باید wav, 8Khz, Mono, 16-Bitباشد."
+       FORMAT_FILE : "فرمت فایل های صوتی باید wav, 8Khz, Mono, 16-Bitباشد.",
+       FILE_UPLOADED : "فایل شما با موفقیت اپلود شد"
     },
 }

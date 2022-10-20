@@ -39,6 +39,7 @@ export default {
        MISSION_COMPLETE : "Mission Complete" ,
        THE_DAY_BEFORE : 'The Day before' ,
        CHOOSE_FILE : "Please Choose Your File" , 
-       FORMAT_FILE : "The format of audio files should be wav, 8Khz, Mono, 16-Bit."
+       FORMAT_FILE : "The format of audio files should be wav, 8Khz, Mono, 16-Bit.",
+       FILE_UPLOADED : "Your file has been successfully uploaded"
     },
 }
