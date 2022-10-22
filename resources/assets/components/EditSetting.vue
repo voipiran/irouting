@@ -109,6 +109,11 @@
             <label class="mx-3">{{ $t("GENERAL.PLAY_AGENT_NUM") }}</label>
             <Toggle v-model="toggleSwitch" />
           </div>
+          <div class="px-3 mb-5">
+            <p>
+                  {{ $t("EDIT_SETTINGS.FORMAT_FILE") }}
+            </p>
+          </div>
           <div class="d-flex flex-column flex-md-row">
             <div class="col-12 col-md-4 mb-5">
               <div :class="{ pointer_event: toggleSwitch }">
@@ -123,9 +128,6 @@
                   :store-as-files="true"
                   @processfiles="loadAudio(1)"
                 />
-                <p>
-                  {{ $t("EDIT_SETTINGS.FORMAT_FILE") }}
-                </p>
               </div>
               <div :key="keyUpdateAudioPlayer">
                 <AudioPlayer
@@ -156,9 +158,6 @@
                   :store-as-files="true"
                   @processfiles="loadAudio(2)"
                 />
-                <p class="text-format">
-                  {{ $t("EDIT_SETTINGS.FORMAT_FILE") }}
-                </p>
               </div>
               <div :key="keyUpdateAudioPlayer">
                 <AudioPlayer
@@ -189,9 +188,6 @@
                   :store-as-files="true"
                   @processfiles="loadAudio(3)"
                 />
-                <p class="text-format">
-                  {{ $t("EDIT_SETTINGS.FORMAT_FILE") }}
-                </p>
               </div>
               <div :key="keyUpdateAudioPlayer">
                 <AudioPlayer
@@ -538,9 +534,6 @@ export default {
     border: 1px solid rgb(67, 67, 67);
     color: black;
   }
-}
-.text-format {
-  visibility: hidden;
 }
 .alert-message {
   background-color:#6ae26a;

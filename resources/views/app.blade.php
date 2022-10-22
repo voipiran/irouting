@@ -304,7 +304,7 @@
                         <li class="active">
                             <router-link tag="a" to="/settings" class="active">
                                 <i class="fa fa-dashboard"></i>
-                                <span class="p-2">تنظیمات</span>
+                                <span class="p-2">مسیریابی هوشمند</span>
                             </router-link>
                         </li>
                     </ul>
