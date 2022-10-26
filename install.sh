@@ -3,20 +3,20 @@ echo "Install voipiran iRouting"
 echo "VOIPIRAN.io"
 sleep 1
 
-echo "------------START-----------------"
-echo "Install sourceguardian Files"
-echo "------------Copy SourceGaurd-----------------"
-yes | cp -rf installation/sourceguardian/ixed.5.4.lin /usr/lib64/php/modules
-yes | cp -rf installation/sourceguardian/ixed.5.4ts.lin /usr/lib64/php/modules
-yes | cp -rf /etc/php.ini /etc/php-old.ini
-yes | cp -rf installation/sourceguardian/php.ini /etc
-echo "SourceGuardian Files have Moved Sucsessfully"
-sleep 1
+#echo "------------START-----------------"
+#echo "Install sourceguardian Files"
+#echo "------------Copy SourceGaurd-----------------"
+#yes | cp -rf installation/sourceguardian/ixed.5.4.lin /usr/lib64/php/modules
+#yes | cp -rf installation/sourceguardian/ixed.5.4ts.lin /usr/lib64/php/modules
+#yes | cp -rf /etc/php.ini /etc/php-old.ini
+#yes | cp -rf installation/sourceguardian/php.ini /etc
+#echo "SourceGuardian Files have Moved Sucsessfully"
+#sleep 1
 
 echo "-------------Installing Composer----------------"
 #yum -y -q install php-cli php-zip wget unzip  > /dev/null
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php composer-setup.php --install-dir=/usr/local/bin --filename=composer  > /dev/null
+#php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+#php composer-setup.php --install-dir=/usr/local/bin --filename=composer  > /dev/null
 yes | composer install
 echo "Installing Composer Sucsessfully"
 sleep 1
@@ -106,6 +106,8 @@ echo "-------------Apache Restart----------------"
 service httpd restart
 echo "Apache has Restarted Sucsessfully"
 sleep 1
+
+cd /root
 
 echo "-----------FINISHED (voipiran.io)-----------"
 
