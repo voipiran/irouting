@@ -60,21 +60,9 @@ ln -s /var/www/voipiran/irouting/storage/app /var/www/html/voipiran/irouting/sto
 yes | cp -rf -rf installation/vi-irouting.php /var/lib/asterisk/agi-bin
 
 ###Add Permisions
-#chmod -R 777 /var/www/voipiran
-#chmod -R 777 /var/www/html/voipiran
-chmod -R 777 /var/www/voipiran/irouting/storage/app
-chmod -R 777 /var/www/voipiran/irouting/storage
+chmod -R 777 /var/www/html/voipiran/irouting/storage
+chown -R asterisk:root /var/www/html/voipiran/irouting/storage
 chmod 777 /var/lib/asterisk/agi-bin/vi-irouting.php
-
-chown -R asterisk:asterisk /var/www/voipiran/irouting
-#chown -R asterisk:asterisk /var/www/voipiran
-#chown -R asterisk:asterisk /var/www/html/voipiran
-chown -R asterisk:root /var/www/voipiran/irouting/storage
-chmod -R 777 /var/www/voipiran/irouting/storage
-chown -R asterisk:root /var/www/voipiran/irouting/storage/app
-chmod -R 777 /var/www/voipiran/irouting/storage/app
-
-
 
 
 echo '<Directory "/var/www/html/voipiran/irouting">' >> /etc/httpd/conf.d/issabel-htaccess.conf
