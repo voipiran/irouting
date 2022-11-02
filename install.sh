@@ -61,6 +61,8 @@ yes | cp -rf -rf installation/vi-irouting.php /var/lib/asterisk/agi-bin
 
 ###Add Permisions
 chmod -R 777 /var/www/html/voipiran/irouting/storage
+chmod -R 777 /var/www/voipiran/irouting/storage
+chown -R asterisk:root /var/www/voipiran/irouting/storage
 chown -R asterisk:root /var/www/html/voipiran/irouting/storage
 chmod 777 /var/lib/asterisk/agi-bin/vi-irouting.php
 
