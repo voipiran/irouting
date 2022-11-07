@@ -3,7 +3,7 @@
 
 /*Set Defaut Paths*/
 $voicePath = "/var/www/voipiran/irouting/storage/app/";
-$timeout = "3000";
+$timeout = "2000";
 
 /*Set Time Zone*/
 date_default_timezone_set('Asia/Tehran');
@@ -26,6 +26,12 @@ $agi->set_variable("CHANNEL(language)", "pr");
 /*Get CallerID*/
 $cid = $agi->get_variable("CALLERID(num)");
 $cid = $cid['data'];
+
+//Do not RUN on Call from another PBX
+if(strlen($cid) <= 5){
+	die();
+}
+
 
 $con = mysql_connect($DBServer, $DBUser, $DBPassword);
 if (!$con) {
