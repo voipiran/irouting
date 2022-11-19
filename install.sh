@@ -79,11 +79,11 @@ yes | composer dump-autoload
 ### Add from-pstn Context
 echo "-------------Extension Custom----------------"
 echo "" >> /etc/asterisk/extensions_custom.conf
-echo "[from-pstn]" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,1,NoOp(VOIPIRAN.io-app1)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,NoOp(VOIPIRAN.io-app2)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,NoOp(VOIPIRAN.io-app3)" >> /etc/asterisk/extensions_custom.conf
+echo "[from-pstn-custom]" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,1,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
+#echo "exten => _.,n,NoOp(VOIPIRAN.io-app2)" >> /etc/asterisk/extensions_custom.conf
+#echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
+#echo "exten => _.,n,NoOp(VOIPIRAN.io-app3)" >> /etc/asterisk/extensions_custom.conf
 
 
 service asterisk reload
