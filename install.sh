@@ -14,9 +14,9 @@ sleep 1
 #sleep 1
 
 echo "-------------Installing Composer----------------"
-#yum -y -q install php-cli php-zip wget unzip  > /dev/null
-#php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-#php composer-setup.php --install-dir=/usr/local/bin --filename=composer  > /dev/null
+yum -y -q install php-cli php-zip wget unzip  > /dev/null
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php --install-dir=/usr/local/bin --filename=composer  > /dev/null
 yes | composer install
 echo "Installing Composer Sucsessfully"
 sleep 1
@@ -81,6 +81,7 @@ echo "-------------Extension Custom----------------"
 echo "" >> /etc/asterisk/extensions_custom.conf
 echo "[from-pstn-custom]" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,1,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,n,Goto(ext-did,s,1)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,NoOp(VOIPIRAN.io-app2)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,NoOp(VOIPIRAN.io-app3)" >> /etc/asterisk/extensions_custom.conf
