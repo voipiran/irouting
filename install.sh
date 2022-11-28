@@ -58,6 +58,8 @@ ln -s /var/www/voipiran/irouting/storage/app /var/www/html/voipiran/irouting/sto
 
 
 yes | cp -rf -rf installation/vi-irouting.php /var/lib/asterisk/agi-bin
+yes | cp -rf -rf installation/extensions_voipiran_numberformatter.conf /etc/asterisk
+
 
 ###Add Permisions
 chmod -R 777 /var/www/html/voipiran/irouting/storage
@@ -65,7 +67,8 @@ chmod -R 777 /var/www/voipiran/irouting/storage
 chown -R asterisk:root /var/www/voipiran/irouting/storage
 chown -R asterisk:root /var/www/html/voipiran/irouting/storage
 chmod 777 /var/lib/asterisk/agi-bin/vi-irouting.php
-
+chown -R asterisk:asterisk /etc/asterisk/extensions_voipiran_numberformatter.conf
+chmod 777 /etc/asterisk/extensions_voipiran_numberformatter.conf
 
 echo '<Directory "/var/www/html/voipiran/irouting">' >> /etc/httpd/conf.d/issabel-htaccess.conf
 echo 'AllowOverride All' >> /etc/httpd/conf.d/issabel-htaccess.conf
@@ -80,12 +83,13 @@ yes | composer dump-autoload
 echo "-------------Extension Custom----------------"
 echo "" >> /etc/asterisk/extensions_custom.conf
 echo "[from-pstn-custom]" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,1,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,1,Gosub(numberformatter,s,1)" >> /etc/asterisk/extensions_custom.conf
+echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,n,Goto(ext-did,s,1)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,NoOp(VOIPIRAN.io-app2)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,NoOp(VOIPIRAN.io-app3)" >> /etc/asterisk/extensions_custom.conf
-
+#include extensions_voipiran_numberformatter.conf
 
 service asterisk reload
 
