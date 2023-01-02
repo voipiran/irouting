@@ -82,6 +82,7 @@ yes | composer dump-autoload
 ### Add from-pstn Context
 echo "-------------Extension Custom----------------"
 echo "" >> /etc/asterisk/extensions_custom.conf
+echo "#include extensions_voipiran_numberformatter.conf" >> /etc/asterisk/extensions_custom.conf
 echo "[from-pstn-custom]" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,1,Gosub(numberformatter,s,1)" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
