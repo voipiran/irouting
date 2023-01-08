@@ -86,7 +86,7 @@ echo "#include extensions_voipiran_numberformatter.conf" >> /etc/asterisk/extens
 echo "[from-pstn-custom]" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,1,Gosub(numberformatter,s,1)" >> /etc/asterisk/extensions_custom.conf
 echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
-echo "exten => _.,n,Goto(ext-did,s,1)" >> /etc/asterisk/extensions_custom.conf
+#echo "exten => _.,n,Goto(ext-did,s,1)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,NoOp(VOIPIRAN.io-app2)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,AGI(vi-irouting.php)" >> /etc/asterisk/extensions_custom.conf
 #echo "exten => _.,n,NoOp(VOIPIRAN.io-app3)" >> /etc/asterisk/extensions_custom.conf
